@@ -35,15 +35,17 @@ LDR.AppView = Backbone.View.extend({
         return this;
     },
     renderDashboard: function(){
+        var that = this;
         var user = this.store.getAuth();
         this.store.child('users/'+user.uid+'/partner_email').once('value', function(partner_email){
             LDR.EmailUidMap.getUserIdByEmail(partner_email.val(), function(partner_uid){
                 // get partner_email and partner_uid
 
                 var relationship_store = LDR.Relationship.relationship_store(partner_uid);
-                // this.renderPhotobooths(partner_uid);
-                // this.settingsView = this.$('.settings').html(new LDR.SettingsView({uid: user.uid}).render().el);
-                this.loveButton = this.$('.love-holder').html(new LDR.LoveButtonView({relationship: relationship_store}).el);
+                // that.renderPhotobooths(partner_uid);
+                // that.settingsView = that.$('.settings').html(new LDR.SettingsView({uid: user.uid}).render().el);
+                // that.loveButton = that.$('.love-holder').html(new LDR.LoveButtonView({relationship: relationship_store}).el);
+                that.countdowns = that.$('.countdown-holder').html(new LDR.CountdownsView({relationship: relationship_store}).el);
             });
         });
     },
