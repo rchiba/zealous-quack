@@ -1,0 +1,34 @@
+.photobooth{
+    height: 230px;
+    width:307px;
+    position:relative;
+}
+
+.photobooth video, .photobooth img, .photobooth canvas, .photobooth .click_photobooth{
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    border-radius: 4px;
+}
+
+.photobooth video{
+    display: none;
+}
+.photobooth img{
+}
+.photobooth canvas{
+    display: none;
+}
+.photobooth .click_photobooth{
+    cursor: pointer;
+}
+.photobooth .timeago{
+    font-size: 13px;
+    position: absolute;
+    padding: 10px;
+    font-weight: bold;
+    text-shadow: black 1px 1px 2px;
+    color: white;
+}

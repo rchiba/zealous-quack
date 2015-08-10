@@ -1,0 +1,29 @@
+<div class="modal fade settings-modal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <% if(onboarding){ %>
+                    Just one more thing...
+                <% } else { %>
+                    Settings
+                <% } %>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                    <div class="well">
+                        Current email: <b><%= current_email %></b> <br />
+                        Current timezone: <b><%= current_timezone %></b>
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label for="settings-partner-email">Partner's Email</label>
+                            <input name="partner_email" type="email" class="form-control" id="settings-partner-email" placeholder="lovebug@cutie.com" value="<%= partner_email %>">
+                        </div>
+                        <div class="settings-modal-relationship"></div>
+                        <button type="submit" class="btn btn-primary settings-save">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

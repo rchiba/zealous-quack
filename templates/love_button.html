@@ -1,0 +1,41 @@
+<div class="love-points">
+<%= collected_points %>
+<%= uncollected_points %>
+<%= last_uid %>
+</div>
+<%
+var default_font_size = 12;
+var max_font_size = 60;
+var points_to_max = 100;
+
+var heart_font_size = parseInt( default_font_size + uncollected_points / points_to_max * (max_font_size - default_font_size), 10 );
+if(heart_font_size > max_font_size){
+    heart_font_size = max_font_size;
+}
+
+var shake_class;
+var threshold1 = points_to_max;
+var threshold2 = points_to_max + 100;
+var threshold3 = points_to_max + 200;
+var threshold4 = points_to_max + 300;
+if(uncollected_points < threshold1){
+    shake_class = '';
+}else if(uncollected_points >= threshold1 && uncollected_points < threshold2){
+    shake_class = 'shake shake-constant shake-little';
+} else if(uncollected_points >= threshold2 && uncollected_points < threshold3){
+    shake_class = 'shake shake-constant';
+} else if(uncollected_points >= threshold3 && uncollected_points < threshold4){
+    shake_class = 'shake shake-constant shake-hard';
+} else{
+    shake_class = 'shake shake-constant shake-crazy';
+}
+
+%>
+<div class="love-fountain">
+
+</div>
+<div class="love-button-holder">
+    <div class="love-button">
+        <i class="fa fa-heart <%= shake_class %>" style="font-size: <%= heart_font_size %>px"></i>
+    </div>
+</div>

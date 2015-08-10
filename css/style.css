@@ -1,0 +1,21 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #ECE8DF;
+  background: url(http://subtlepatterns.com/patterns/extra_clean_paper.png) repeat;
+}
+
+.clickable{
+    cursor: pointer;
+}
+.photobooth1{
+    float:left;
+}
+.photobooth2{
+    float:right;
+}
+.love-holder{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}

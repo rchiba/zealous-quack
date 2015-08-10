@@ -1,0 +1,21 @@
+<% if(!onboarding){ %>
+
+    <% if(status === LDR.Relationship.PARTNER_DNE){ %>
+    <div class="alert alert-info">
+        <i class="fa fa-exclamation-triangle"></i> Your partner does not exist yet
+    </div>
+    <% } else if(status === LDR.Relationship.PARTNER_EMAIL_MISMATCH) { %>
+    <div class="alert alert-error">
+        <i class="fa fa-exclamation-triangle"></i> Your partner does not have you listed as their partner
+    </div>
+    <% } else if(status === LDR.Relationship.PARTNER_READY) { %>
+    <div class="alert alert-info">
+        <i class="fa fa-exclamation-triangle"></i> Your partner is ready to pair
+    </div>
+    <% } else if(status === LDR.Relationship.PARTNER_CONNECTED) { %>
+    <div class="alert alert-success">
+        <i class="fa fa-check"></i> Your partner is connected
+    </div>
+    <% } %>
+
+<% } %>
