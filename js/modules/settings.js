@@ -69,8 +69,7 @@ LDR.SettingsModalView = Backbone.View.extend({
         return {
             partner_email: partner_email,
             onboarding: onboarding,
-            current_email: this.model.email,
-            current_timezone: this.model.timezone
+            current_email: this.model.email
         };
     },
     render: function(){
@@ -89,7 +88,6 @@ LDR.SettingsModalView = Backbone.View.extend({
     saveUser: function(){
         var deferred = $.Deferred();
         var settings = this.$('form').serializeObject();
-        settings.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         this.store.update(settings, function(){
             deferred.resolve();
         });

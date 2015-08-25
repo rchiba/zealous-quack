@@ -1,0 +1,17 @@
+<i class="fa fa-refresh clock-update-timezone-geo" data-toggle="tooltip" data-placement="top" title="Update My Location and Timezone"></i>
+<div class="clock-my">
+    <div class="clock-my-time">
+        <%= my_time %>
+    </div>
+    <div class="clock-my-weather">
+    </div>
+</div>
+<% if(typeof partner_time !== 'undefined'){ %>
+<div class="clock-partner">
+    <div class="clock-partner-time">
+        <%= partner_time %>
+    </div>
+    <div class="clock-partner-weather">
+    </div>
+</div>
+<% } %>

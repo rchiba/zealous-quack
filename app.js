@@ -45,7 +45,8 @@ LDR.AppView = Backbone.View.extend({
                 // that.renderPhotobooths(partner_uid);
                 // that.settingsView = that.$('.settings').html(new LDR.SettingsView({uid: user.uid}).render().el);
                 // that.loveButton = that.$('.love-holder').html(new LDR.LoveButtonView({relationship: relationship_store}).el);
-                that.countdowns = that.$('.countdown-holder').html(new LDR.CountdownsView({relationship: relationship_store}).el);
+                // that.countdowns = that.$('.countdown-holder').html(new LDR.CountdownsView({relationship: relationship_store}).el);
+                that.clock = that.$('.clock-holder').html(new LDR.ClockView({relationship: relationship_store, partner_uid: partner_uid}).el);
             });
         });
     },

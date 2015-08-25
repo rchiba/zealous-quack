@@ -1,16 +1,31 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:700);
 
+.countdowns{
+  width: 200px;
+}
+
+.countdown{
+  position: relative;
+}
+
+.countdown-delete{
+  color: #8E8E8E;
+  display: none;
+}
+
+.countdown:hover .countdown-delete{
+  display: inline-block;
+}
+
 progress {
  appearance: none;
  position: relative;
- overflow: hidden;
- width: 1.5em;
- height: 1em;
  padding: 0;
  border: none;
  font-family: "Ubuntu Mono", sans-serif;
  font-size: 120px;
  transition: height .4s;
+ width: auto;
 }
 
 progress.hidden {
@@ -20,19 +35,19 @@ progress.hidden {
 
 progress::before {
   content: attr(value);
-  position: absolute;
-  top:0; left: 0; right: 0; bottom: 0;
+  position: relative;
+  height:auto;
   text-align: center;
-  font-size: 1.5em;
-  line-height: .62em;
-  color: hsla(0,0%,100%,.2);
+  line-height: .7;
+  color: hsla(0,0%,0%,.2);
   background: linear-gradient( 
-      hsla(0,0%,100%,.6),
-      hsla(0,0%,100%,.0) 70% ) 
+      hsla(0,0%,0%,.8),
+      hsla(0,0%,0%,.2) 70% ) 
       no-repeat center;
   background-position: inherit;
   -webkit-background-clip: text;
   background-clip: text;
+  display: inline-block;
 }
 
 

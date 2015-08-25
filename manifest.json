@@ -4,7 +4,8 @@
   "name": "LDR Extension",
   "description": "Stay close, far away",
   "permissions": [
-    "storage"
+    "storage",
+    "geolocation"
   ],
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.firebaseio.com; object-src 'self'",
   "chrome_url_overrides": {
