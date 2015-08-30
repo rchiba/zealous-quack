@@ -1,7 +1,15 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:700);
 
-.countdowns{
-  width: 200px;
+.countdown-holder{
+  text-align: center;
+}
+
+.open-countdown-add{
+  opacity:0;
+}
+
+.countdown-holder:hover .open-countdown-add{
+  opacity:1;
 }
 
 .countdown{

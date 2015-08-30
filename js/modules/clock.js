@@ -12,7 +12,7 @@ happen relatively infrequently.
 
 LDR.ClockView = Backbone.View.extend({
     template: 'clock',
-    className: 'clock',
+    className: 'clock clearfix',
     getStore: function(){
         var deferred = $.Deferred();
         this.store.once('value', function(snap){
@@ -89,6 +89,7 @@ LDR.ClockView = Backbone.View.extend({
             };
             that.store.child('geo').update(updateObj);
             LDR.Cache.clear();
+            alert('Timezone and geo updated. New data: '+JSON.stringify(updateObj));
         });
         var updateObj = {};
         updateObj[this.uid] = this.my_timezone_offset;

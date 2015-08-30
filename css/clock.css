@@ -1,0 +1,25 @@
+.clock-holder{
+}
+.clock-my, .clock-partner{
+    text-align: center;
+}
+
+.clock-time{
+    font-size:60px;
+}
+
+.clock-weather{
+    font-size: 27px;
+}
+
+.clock-update-timezone-geo{
+    opacity:0;
+}
+
+.clock-my:hover .clock-update-timezone-geo{
+    opacity: 0.7;
+}
+
+.clock-update-timezone-geo:hover{
+    opacity:1;
+}

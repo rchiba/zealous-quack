@@ -6,12 +6,7 @@ body {
 .clickable{
     cursor: pointer;
 }
-.photobooth1{
-    float:left;
-}
-.photobooth2{
-    float:right;
-}
+
 .love-holder{
     position: absolute;
     bottom: 0;

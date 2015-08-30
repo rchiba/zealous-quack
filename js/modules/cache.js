@@ -18,12 +18,14 @@ LDR.Cache = (function(){
                 // use getter to get data, save to cache, and return
                 var getterPromise = getter();
                 $.when(getterPromise).done(function(fetchedValue){
-                    var newCacheItem = {};
-                    newCacheItem[key] = {
+                    if(typeof data.cache === 'undefined'){
+                        data.cache = {};
+                    }
+                    data.cache[key] = {
                         value: fetchedValue,
                         expiresTimestamp: new Date().getTime() + cacheMinutes * 60 * 1000
                     };
-                    chrome.storage.local.set(newCacheItem);
+                    chrome.storage.local.set(data);
                     deferred.resolve(fetchedValue);
                 });
             } else{

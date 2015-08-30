@@ -25,7 +25,7 @@ LDR.WeatherView = Backbone.View.extend({
         return {
             weather_icon: LDR.WeatherView.weatherToIconMap[this.weather.weather[0].icon],
             weather_description: this.weather.weather[0].description,
-            temperature: this.weather.main.temp,
+            temperature: Math.floor(this.weather.main.temp)+'&deg;',
             latitude: this.position.latitude.toFixed(3),
             longitude: this.position.longitude.toFixed(3)
         };

@@ -1,0 +1,11 @@
+.settings{
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    font-size: 29px;
+    opacity: 0.5;
+}
+
+.settings:hover{
+    opacity:1;
+}

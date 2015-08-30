@@ -1,6 +1,7 @@
 // The cog that triggers the settings modal to open
 LDR.SettingsView = Backbone.View.extend({
     template: 'settings',
+    className: 'settings',
     initialize: function(options){
         this.uid = options.uid;
     },
@@ -53,7 +54,8 @@ LDR.SettingsModalView = Backbone.View.extend({
         });
     },
     events:{
-        'click .settings-save': 'saveSettings'
+        'click .settings-save': 'saveSettings',
+        'click .settings-cancel': 'closeModal'
     },
     serializeData: function(){
         var onboarding, partner_email, relationship_status;
@@ -109,5 +111,9 @@ LDR.SettingsModalView = Backbone.View.extend({
             }
         });
         return deferred.promise();
+    },
+    closeModal: function(e){
+        e.preventDefault();
+        this.$('.modal').modal('hide');
     }
 });
