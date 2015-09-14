@@ -178,15 +178,15 @@ describe("Cache", function() {
       
       var store = {
         once: function(){}
-      }
+      };
       
       var snapshot = {
         val: function(){}
-      }
+      };
 
       beforeEach(function(){
         spyOn(store, 'once');
-        spyOn(window, 'Firebase').and.returnValue(store);     
+        spyOn(window, 'Firebase').and.returnValue(store);
       });
 
       function execute_firebase_callback(params){
@@ -272,12 +272,12 @@ describe("Cache", function() {
 
       var store = {
         set: function(){}
-      }
+      };
 
       beforeEach(function(){
         spyOn(chrome.storage.local, 'set');
         spyOn(store, 'set');
-        spyOn(window, 'Firebase').and.returnValue(store);  
+        spyOn(window, 'Firebase').and.returnValue(store);
         getterDeferred.resolve('value');
       });
 

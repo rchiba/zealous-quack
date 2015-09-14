@@ -5,19 +5,29 @@ LDR.PhotoboothView = Backbone.View.extend({
         var that = this;
         this.uid = options.uid;
         this.localMediaStream = null;
+        this.cacheKey = this.uid + '-photo';
         this.store = new Firebase(LDR.AppView.STORE_URL + 'photos/' + this.uid);
-        this.store.limitToLast(1).on("value", function(snapshot) {
-            that.photo = _.map(snapshot.val())[0];
+        this.default_photo = 'http://lorempixel.com/300/300/cats/';
+        this.getter = function(){
+            var deferred = $.Deferred();
+            that.store.limitToLast(1).once('value', function(snapshot){
+                var photo = _.map(snapshot.val())[0] || {url: that.default_photo};
+                deferred.resolve(photo);
+            });
+            return deferred;
+        };
+        var cached_deferred = LDR.Cache.get_recent(this.uid, this.cacheKey, this.getter);
+
+        $.when(cached_deferred).done(function(photo){
+            that.photo = photo;
             that.render.call(that);
-        }, function(err){
-            console.log(err);
         });
     },
     events:{
         'click .click_photobooth': 'click_photobooth'
     },
     serializeData: function(){
-        var photo_url = 'http://lorempixel.com/300/300/cats/';
+        var photo_url = this.default_photo;
         var timeago = '';
         var clickable = true;
         if(this.photo){
@@ -65,6 +75,8 @@ LDR.PhotoboothView = Backbone.View.extend({
         this.store.push({
             url: captured_image,
             timestamp: new Date().getTime()
+        }, function(){
+            LDR.Cache.set_recent(that.uid, that.cacheKey, that.getter);
         });
     },
     click_photobooth: function(){

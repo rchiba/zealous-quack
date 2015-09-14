@@ -101,7 +101,7 @@ LDR.Cache = (function(){
                 last_updated_store.once('value', function(snapshot){
                     var last_updated_data = snapshot.val();
                     var firebase_last_updated;
-                    if(typeof last_updated_data === 'object'){
+                    if(last_updated_data && typeof last_updated_data === 'object'){
                         firebase_last_updated = last_updated_data[key];
                     }
                     if(typeof firebase_last_updated === 'undefined'){
