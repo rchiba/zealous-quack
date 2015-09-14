@@ -173,10 +173,132 @@ describe("Cache", function() {
 
     });
 
+    describe('when item is found in cache', function(){
+      var firebase_response, cachedData;
+      
+      var store = {
+        once: function(){}
+      }
+      
+      var snapshot = {
+        val: function(){}
+      }
+
+      beforeEach(function(){
+        spyOn(store, 'once');
+        spyOn(window, 'Firebase').and.returnValue(store);     
+      });
+
+      function execute_firebase_callback(params){
+        var callback = store.once.calls.first().args[1];
+        callback(params);
+      }
+
+      function setup_with_firebase_response(firebase_response){
+        spyOn(snapshot, 'val').and.returnValue(firebase_response);
+        cachedData = {
+          cache: {
+            key: {
+              value: 'hi',
+              expiresTimestamp: 0,
+              lastUpdated: current_time
+            }
+          }
+        };
+        executeCallback(cachedData);
+        subject();
+        execute_firebase_callback(snapshot);
+      }
+
+      describe('when last_updated does not exist in firebase', function(){
+        beforeEach(function(){
+          setup_with_firebase_response({});
+        });
+
+        it('should NOT call the getter', function(){
+          expect(getter.calls.count()).toEqual(0);
+        });
+      });
+
+      describe('when last_updated is older than cache\'s last updated', function(){
+        beforeEach(function(){
+          setup_with_firebase_response({
+            key: current_time-1
+          });
+        });
+
+        it('should NOT call the getter', function(){
+          expect(getter.calls.count()).toEqual(0);
+        });
+      });
+
+      describe('when last_updated is newer than cache\'s last updated', function(){
+        beforeEach(function(){
+          setup_with_firebase_response({
+            key: current_time+1
+          });
+        });
+
+        it('should call the getter', function(){
+          expect(getter.calls.count()).toEqual(1);
+        });
+      });
+
+    });
+
+
   });
 
   // TODO: Get all these specs to work
   describe('.set_recent', function(){
+    var uid, key, getter, getterDeferred;
+    beforeEach(function(){
+      uid = 'uid';
+      key = 'key';
+      getterDeferred = $.Deferred();
+      getter = jasmine.createSpy('getter').and.returnValue(getterDeferred);
+      subject();
+    });
+
+    function subject(){
+      cache.set_recent(uid, key, getter);
+    }
+
+    it('should call the getter', function(){
+      expect(getter.calls.count()).toEqual(1);
+    });
+
+    describe('after getter returns data', function(){
+
+      var store = {
+        set: function(){}
+      }
+
+      beforeEach(function(){
+        spyOn(chrome.storage.local, 'set');
+        spyOn(store, 'set');
+        spyOn(window, 'Firebase').and.returnValue(store);  
+        getterDeferred.resolve('value');
+      });
+
+      it('should save data to local storage', function(){
+        expect(chrome.storage.local.set).toHaveBeenCalledWith({
+            cache: {
+              key: {
+                value: 'value',
+                expiresTimestamp: current_time,
+                lastUpdated: current_time
+              }
+            }
+        });
+      });
+
+      it('should save data to firebase', function(){
+        expect(store.set).toHaveBeenCalledWith({
+          key: current_time
+        });
+      });
+    });
 
   });
 

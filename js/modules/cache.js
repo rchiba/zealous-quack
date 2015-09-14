@@ -105,7 +105,7 @@ LDR.Cache = (function(){
                         firebase_last_updated = last_updated_data[key];
                     }
                     if(typeof firebase_last_updated === 'undefined'){
-                        // 1. last updated does not exist
+                        // 1. last_updated does not exist
                     } else if(firebase_last_updated <= cache_last_updated){
                         // 2. last_updated is behind cache's last updated
                     } else{
@@ -132,22 +132,25 @@ LDR.Cache = (function(){
     // set both chrome and firebase last_updated for a given key
     cache.set_recent = function(uid, key, getter){
         // use getter to get data, save to cache, and return
+        var deferred = $.Deferred();
         var getterPromise = getter();
         $.when(getterPromise).done(function(fetchedValue){
-            if(typeof data.cache === 'undefined'){
-                data.cache = {};
-            }
+            var lastUpdated = new Date().getTime();
+            var data = {cache: {}};
             data.cache[key] = constructCacheItem({
                 value: fetchedValue,
-                cacheMinutes: cacheMinutes
+                lastUpdated: lastUpdated
             });
             chrome.storage.local.set(data);
 
             var last_updated_store = new Firebase(LDR.AppView.STORE_URL + 'cache/last_updated/' + uid);
-            last_updated_store.child(key).set(data.cache[key].lastUpdated);
+            var obj_to_store = {};
+            obj_to_store[key] = data.cache[key].lastUpdated;
+            last_updated_store.set(obj_to_store);
 
             deferred.resolve(fetchedValue);
         });
+        return deferred;
     };
 
     return cache;
