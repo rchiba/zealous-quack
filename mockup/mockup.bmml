@@ -22,7 +22,7 @@
         <text>1%3A34am</text>
       </controlProperties>
     </control>
-    <control controlID="5" controlTypeID="com.balsamiq.mockups::Image" x="680" y="357" w="194" h="143" measuredW="2448" measuredH="1800" zOrder="4" locked="false" isInGroup="-1">
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Image" x="680" y="357" w="194" h="143" measuredW="800" measuredH="588" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
         <filter>true</filter>
         <src>./assets/monica.JPG</src>
@@ -101,6 +101,12 @@
       <controlProperties>
         <borderStyle>square</borderStyle>
         <icon>GearIcon%7Clarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::Icon" x="568" y="249" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <icon>ReloadIcon%7Csmall</icon>
       </controlProperties>
     </control>
   </controls>
